@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head><title>User Profile</title></head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<body>
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+          <span class="card-title"><h3>User Profile</h3>
+			<div class="card-content">
+          <ul class="collection">
+			<li class="collection-item avatar">
+				<span class="title"><h5>User ID:</h5></span>
+					<p>{{ count }}</p>
+			</li>
+			<li class="collection-item avatar">
+				<span class="title"><h5>Full Name:</h5></span>
+					<p>{{ full_name }}</p>
+			</li>
+			<li class="collection-item avatar">
+				<span class="title"><h5>E-mail Address:</h5></span>
+					<p>{{ email }}</p>
+			</li>
+			<li class="collection-item avatar">
+				<span class="title"><h5>Birthdate:</h5></span>
+					<p>{{ bdate }}</p>
+			</li>
+			<li class="collection-item avatar">
+				<span class="title"><h5>Phone no.:</h5></span>
+					<p>{{ phoneno }}</p>
+			</li>
+		</ul>
+		<a href="/home/editProfile/" class="waves-effect waves-light btn">Edit Profile</a>
+		<a href="/home/editPassword/" class="waves-effect waves-light btn">Edit Passwrd</a>
+        </div>
+		  </span>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

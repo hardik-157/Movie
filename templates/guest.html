@@ -1,0 +1,95 @@
+<html>
+        <title>ABC-Cinemas</title>
+        <head>
+            <style>
+                h1 {color:black;
+                    font-family: Verdana;
+                    border: 3px solid green;
+                    border-radius: 7px
+                    
+                }
+                h2 {color:black;
+                    font-family: Verdana;
+                }
+                input[type=text] {width: 100%;
+                       padding: 12px 20px;
+                       box-sizing: border-box;
+                       border: 3px solid black;
+                       border-radius: 6px; 
+                }
+                input[type=password] {width: 100%;
+                       padding: 12px 20px;
+                       box-sizing: border-box;
+                       border: 3px solid black;
+                       border-radius: 6px; 
+                }
+                input[type=submit]{
+                    width: 100%;
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 12px 12px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    float: right;
+                }
+                input[type=submit]:hover {
+                    background-color: #055A28 
+                }
+                .container{
+                    width: 300;
+                    margin: auto;
+                    align-self: "center";
+                    border-radius: 15px;
+                    background-color: rgba(94, 145, 242,0.8);
+                    padding: 20px;
+                }
+                .row::after{
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+            </style>
+        </head>
+        <body background="background.jpg">
+            <div class="container">
+            <form action="home.html">
+                <div class="row">
+                <table>
+                    <tr>
+                        <td>
+                                <h1 align="center">ABC-Cinemas</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                            <td align="center">
+                                <img alt="" align="center" height="100" width="100" src="avatar.png"/>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <h2 align="center">Guest Log-in</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="100" width="300">
+                                <h3 align="center">Enter your mail address:</h3>
+                                <input type="text"><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="keepLogedIn">Keep me logged in
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Log-in">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+        </div>
+        </body>
+    </html>

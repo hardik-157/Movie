@@ -11,6 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <title>Movie Ticket Booking Widget Flat Responsive Widget Template :: w3layouts</title>
 <!-- for-mobile-apps -->
 {% load static %}
+{% load tags %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -47,33 +48,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</ul>
 				<div class="clear"></div>
 				<ul id="selected-seats" class="scrollbar scrollbar1"></ul>
-			
 						
-				<button class="checkout-button">Book Now</button>	
+				<button class="checkout-button" id="book">Book Now</button>	
 				<div id="legend"></div>
 			</div>
 			<div style="clear:both"></div>
 	    </div>
-
+		<form id="chart" action="/book/ticket/" method="POST">{% csrf_token %}
+		</form>
 			<script type="text/javascript">
-				var price = 10; //price
+				var price='{{price1}}';	//price
+				var price2='{{price2}}';
+				var str='{{chart}}';
 				$(document).ready(function() {
 					var $cart = $('#selected-seats'), //Sitting Area
 					$counter = $('#counter'), //Votes
 					$total = $('#total'); //Total money
-					
 					var sc = $('#seat-map').seatCharts({
 						map: [  //Seating chart
 							'aaaaaaaaaa',
 							'aaaaaaaaaa',
 							'__________',
-							'aaaaaaaa__',
 							'aaaaaaaaaa',
 							'aaaaaaaaaa',
 							'aaaaaaaaaa',
 							'aaaaaaaaaa',
 							'aaaaaaaaaa',
-							'__aaaaaa__'
+							'aaaaaaaaaa',
+							'aaaaaaaaaa'
 						],
 						naming : {
 							top : false,
@@ -89,16 +91,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								[ 'a', 'selected', 'Selected']
 							]					
 						},
+						
 						click: function () { //Click event
 							if (this.status() == 'available') { //optional seat
 								$('<li>Row'+(this.settings.row+1)+' Seat'+this.settings.label+'</li>')
 									.attr('id', 'cart-item-'+this.settings.id)
 									.data('seatId', this.settings.id)
 									.appendTo($cart);
-
+								
+								
 								$counter.text(sc.find('selected').length+1);
 								$total.text(recalculateTotal(sc)+price);
-											
+									
 								return 'selected';
 							} else if (this.status() == 'selected') { //Checked
 									//Update Number
@@ -116,16 +120,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								return this.style();
 							}
 						}
-					});
-					//sold seat
-					sc.get(['1_2', '4_4','4_5','6_6','6_7','8_5','8_6','8_7','8_8', '10_1', '10_2']).status('unavailable');
 						
+					});
+					$("#book").click(function() {
+							/*$.ajax({
+								url: "/book/ticket/",
+								dataType: 'json',
+								data: {
+										'chart': str,
+									},
+								success : function(data) {
+									alert("Successfully sent the URL to Django");
+								},
+								error : function(xhr,errmsg,err) {
+									alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
+								}
+							});*/
+							$('#chart').append('<input type="hidden" name="chart" value="'+str+'">');
+							$('#chart').submit();
+						});
+					{% for i in chart %}
+						{% ifequal i com %}
+							{% if forloop.counter|modulo:10 == 0 %}
+								sc.get(['{{forloop.counter|divide:10}}_{{forloop.counter|modulo:10|add:10}}']).status('unavailable');
+							{% else %}
+								sc.get(['{{forloop.counter|divide:10|add:1}}_{{forloop.counter|modulo:10}}']).status('unavailable');
+							{% endif %}
+						{% endifequal %}
+					{% endfor %}
 				});
 				//sum total money
 				function recalculateTotal(sc) {
 					var total = 0;
 					sc.find('selected').each(function () {
+						
 						total += price;
+						
 					});
 							
 					return total;

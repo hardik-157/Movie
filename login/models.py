@@ -22,21 +22,24 @@ class Movie(models.Model):
 	movie_id=models.CharField(max_length=30,primary_key='true')
 	cinema_id=models.ForeignKey('Cinema',on_delete='true')
 	movie_name=models.CharField(max_length=50)
+	movie_rating=models.IntegerField()
 
 class Cinema(models.Model):
 	cinema_id=models.CharField(max_length=30,primary_key='true')
 	cinema_name=models.CharField(max_length=50)
 	email=models.CharField(max_length=30)
-	phoneno=models.IntegerField();
+	phoneno=models.IntegerField()
 	address=models.CharField(max_length=100)
 	password=models.CharField(max_length=20)
 
-	
 class Show(models.Model):
 	show_id=models.CharField(max_length=30,primary_key='true')
 	cinema_id=models.ForeignKey('Cinema',on_delete='true')
 	movie_id=models.ForeignKey('Movie',on_delete='true')
 	time=models.DateTimeField()
+	price1=models.IntegerField()
+	price2=models.IntegerField()
+	seat=models.CharField(max_length=100)
 	
 class TicketOffer(models.Model):
 	ticket_id=models.ForeignKey('Ticket',on_delete='true')

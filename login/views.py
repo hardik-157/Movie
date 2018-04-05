@@ -41,6 +41,25 @@ def updateProfile(request):
                 return HttpResponseRedirect('/home/profile')
         else:
                 return HttpResponseRedirect('/login/invalidlogin')
+def updatePassword(request):
+	c={}
+	c.update(csrf(request))
+	id = request.user.id
+	cuser = User.objects.get(id=id)
+	form = PasswordChangeForm(request.user, request.POST)
+	c['form']=form
+	if form.is_valid():
+		profile= Cinema.objects.get(cinema_id=cuser.username);
+		profile.password=request.POST.get('new_password1','');
+		profile.save()
+		user = form.save()
+		update_session_auth_hash(request, user)  # Important!
+		#messages.success(request, 'Your password was successfully updated!')
+	else:
+                return render(request,'cinema-home.html',c)
+		#return render(request,'home.hmtl',c)
+	return render(request,'cinema-home.html',c)
+
 def update(request):
 	c={}
 	c.update(csrf(request))
@@ -85,8 +104,12 @@ def auth_view(request):
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)
+	cuser = Cinema.objects.filter(cinema_id=username)
+	count = cuser.count()
 	if user is not None:
 		auth.login(request, user)
+		if int(count)>0:
+                        return HttpResponseRedirect('/CinemaAdmin/home/')
 		return HttpResponseRedirect('/login/loggedin/')
 	else:
 		return HttpResponseRedirect('/login/invalidlogin/')
@@ -95,7 +118,7 @@ def auth_view(request):
 
 def loggedin(request):
 	if request.user.is_authenticated:
-		return HttpResponseRedirect('/home/')
+		return HttpResponseRedirect('/home/location/')
 	else:
 		return HttpResponseRedirect('/login/invalidlogin/')
 
@@ -108,7 +131,7 @@ def invalidlogin(request):
 def signUp(request):
 	c ={}
 	c.update(csrf(request))
-	c['role']="member"
+	c['role'] = 'member'
 	return render(request,'signup.html',c)
 
 def store(request):
@@ -117,15 +140,16 @@ def store(request):
 	password1= request.POST.get('password1', '')
 	password2= request.POST.get('password2', '')
 	email= request.POST.get('email','')
-	phone= request.POST.get('phone', '')
+	phone= int(request.POST.get('phone', ''))
 	date= request.POST.get('date', '')
 	c ={}
 	c.update(csrf(request))
 	form = SignUpForm(request.POST)
 	c['form']=form;
-	c['role']="member"
+	c['role'] = 'member'
 	if form.is_valid():
 			profile= Puser(user_id=username,user_name=name,email=email,phoneno=phone,bdate=date,password=password1)
+			print(profile.phoneno)
 			profile.save()
 			form.save()
 			username = form.cleaned_data.get('username')
@@ -136,27 +160,32 @@ def store(request):
 	return render(request,'signup.html',c)
 
 def cinstore(request):
-	username= request.POST.get('username', '')
-	name= request.POST.get('name','')
-	password1= request.POST.get('password1', '')
-	password2= request.POST.get('password2', '')
-	email= request.POST.get('email','')
-	phone= request.POST.get('phone', '')
+	username = request.POST.get('username', '')
+	name = request.POST.get('name','')
+	password1 = request.POST.get('password1', '')
+	password2 = request.POST.get('password2', '')
+	email = request.POST.get('email','')
+	phone = request.POST.get('phone', '')
+	city = request.POST.get('city','')
 	address= request.POST.get('address','')
 	c={}
 	c.update(csrf(request))
 	form = SignUpForm(request.POST)
 	c['form']=form;
-	c['role']="manager"
+	c['role'] = 'manager'
 	if form.is_valid():
-			profile= Cinema(cinema_id=username,cinema_name=name,email=email,phoneno=phone,password=password1,address=address)
+			profile= Cinema(cinema_id=username,cinema_name=name,email=email,phoneno=phone,password=password1,address=address,city=city)
 			profile.save()
 			form.save()
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
+			city_ob = City.objects.filter(city = city)
+			if int(city_ob.count())<=0:
+                                ci = City(city = city)
+                                ci.save()                                        
 			login(request, user)
-			return render(request,'home.html')
+			return render(request,'cinema-home.html')
 	return render(request,'signup.html',c)
 	
 def logout(request):

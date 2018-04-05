@@ -1,42 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head><title>User Profile</title></head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+{% load static %}
+<head>
+<title>Movie</title>
+</head>
+<link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src={% static "js/jquery-3.3.1.min.js" %}></script>
+<script src={% static "js/c_home/materialize.min.js" %}></script>
 <body>
-<div class="row">
-    <div class="col s12 m6">
-      <div class="card">
-          <span class="card-title"><h3>User Profile</h3>
-			<div class="card-content">
-          <ul class="collection">
-			<li class="collection-item avatar">
-				<span class="title"><h5>User ID:</h5></span>
-					<p>{{ count }}</p>
-			</li>
-			<li class="collection-item avatar">
-				<span class="title"><h5>Full Name:</h5></span>
-					<p>{{ full_name }}</p>
-			</li>
-			<li class="collection-item avatar">
-				<span class="title"><h5>E-mail Address:</h5></span>
-					<p>{{ email }}</p>
-			</li>
-			<li class="collection-item avatar">
-				<span class="title"><h5>Birthdate:</h5></span>
-					<p>{{ bdate }}</p>
-			</li>
-			<li class="collection-item avatar">
-				<span class="title"><h5>Phone no.:</h5></span>
-					<p>{{ phoneno }}</p>
-			</li>
-		</ul>
-		<a href="/home/editProfile/" class="waves-effect waves-light btn">Edit Profile</a>
-		<a href="/home/editPassword/" class="waves-effect waves-light btn">Edit Passwrd</a>
-        </div>
-		  </span>
-        </div>
-    </div>
-  </div>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#!" class="brand-logo">&nbsp User Profile</a>
+			<ul class="right hide-on-med-and-down">
+				<li class="waves-effect waves-light"><a href="/home/">Home</a></li>
+				<li class="active waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
+				<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li>
+				<li class="waves-effect waves-light"><a href="/home/contact/">Contact Us</a></li>
+				<li class="waves-effect waves-light"><a href="/home/about/">About Us</a></li>
+				<li class="waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li>
+				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col s12">
+			<div class="card blue-grey darken-1">
+				<div class="card-content white-text">
+					<span class="card-title"><h3>User Profile</h3></span>
+						<ul class="collection">
+							<li class="collection-item avatar">
+								<table>
+									<tr>
+										<td width="100"><img src={% static "images/profile/userid.png" %}></td>
+										<td><span class="title"><h5>User ID:</h5></span>
+											<p>{{ user_name }}</p></td>
+									</tr>
+								</table>
+							</li>
+							<li class="collection-item avatar">
+								<table>
+									<tr>
+										<td width="100"><img src={% static "images/profile/name.png" %}></td>
+										<td><span class="title"><h5>Full Name:</h5></span>
+											<p>{{ full_name }}</p></td>
+									</tr>
+								</table>
+							</li>
+							<li class="collection-item avatar">
+								<table>
+									<tr>
+										<td width="100"><img src={% static "images/profile/email.png" %}></td>
+										<td><span class="title"><h5>E-Mail Address:</h5></span>
+											<p>{{ email }}</p></td>
+									</tr>
+								</table>
+							</li>
+							<li class="collection-item avatar">
+								<table>
+									<tr>
+										<td width="100"><img src={% static "images/profile/bday.png" %}></td>
+										<td><span class="title"><h5>Birthdate:</h5></span>
+											<p>{{ bdate }}</p></td>
+									</tr>
+								</table>
+							</li>
+							<li class="collection-item avatar">
+								<table>
+									<tr>
+										<td width="100"><img src={% static "images/profile/call.png" %}></td>
+										<td><span class="title"><h5>Phone no.:</h5></span>
+											<p>{{ phoneno }}</p></td>
+									</tr>
+								</table>
+							</li>
+						</ul>
+				</div>
+				<div class="card-action">
+				<a href="/home/editProfile/" class="waves-effect waves-light btn">Edit Profile</a> <a href="/home/editPassword/" class="waves-effect waves-light btn">Edit Passwrd</a>
+			</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

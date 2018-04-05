@@ -1,15 +1,8 @@
 
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 <head>
-<title>Movie Ticket Booking Widget Flat Responsive Widget Template :: w3layouts</title>
-<!-- for-mobile-apps -->
+<title>Movie</title><!-- for-mobile-apps -->
 {% load static %}
 {% load tags %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,9 +18,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 <div class="content">
-	<h1>Movie Ticket Booking Widget</h1>
 	<div class="main">
-		<h2>Multiplex Theatre Showing Screen 1</h2>
 		<div class="demo">
 			<div id="seat-map">
 				<div class="front">SCREEN</div>					
@@ -41,8 +32,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li>Seats :</li>
 				</ul>
 				<ul class="book-right">
-					<li>: Gingerclown</li>
-					<li>: April 3, 21:00</li>
+					<li>: {{ movie_name }}</li>
+					<li>: {{ time }}</li>
 					<li>: <span id="counter">0</span></li>
 					<li>: <b><i>$</i><span id="total">0</span></b></li>
 				</ul>
@@ -54,16 +45,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 			<div style="clear:both"></div>
 	    </div>
-		<form id="chart" action="/book/ticket/" method="POST">{% csrf_token %}
+		<form id="chart" action="/book/book/" method="POST">{% csrf_token %}
 		</form>
 			<script type="text/javascript">
 				
 				String.prototype.replaceAt=function(index, replacement) {
 					return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
 				}
-				var price='{{price1}}';	//price
-				var price2='{{price2}}';
+				var price1=parseInt('{{price1}}');	//price
+				var price2=parseInt('{{price2}}');
 				var str='{{chart}}';
+				var tot=0;
+				var cou=0;
 				console.log(str);
 				$(document).ready(function() {
 					var $cart = $('#selected-seats'), //Sitting Area
@@ -105,21 +98,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								
 								
 								$counter.text(sc.find('selected').length+1);
-								$total.text(recalculateTotal(sc)+price);
+								cou=cou+1;
+								if(this.settings.row+1>2)
+								{
+									$total.text(tot+price2);
+									tot=tot+price2;
+								}
+								else
+								{
+									$total.text(tot+price1);
+									tot=tot+price1;
+								}
 								str = str.replaceAt(this.settings.row*10+this.settings.label-1,"1");
-								console.log(str);
+								console.log(tot);
 								//document.write(temp);
 								return 'selected';
 							} else if (this.status() == 'selected') { //Checked
 									//Update Number
 									$counter.text(sc.find('selected').length-1);
+									cou=cou-1;
 									//update totalnum
-									$total.text(recalculateTotal(sc)-price);
+									if(this.settings.row+1>2)
+									{
+										$total.text(tot-price2);
+										tot=tot-price2;
+									}
+									else
+									{
+										$total.text(tot-price1);
+										tot=tot-price1;
+									}
 										
 									//Delete reservation
 									$('#cart-item-'+this.settings.id).remove();
 									str = str.replaceAt(this.settings.row*10+this.settings.label-1,"0");
-									console.log(str);
+									console.log(tot);
 									//optional
 									return 'available';
 							} else if (this.status() == 'unavailable') { //sold
@@ -145,6 +158,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								}
 							});*/
 							$('#chart').append('<input type="hidden" name="chart" value="'+str+'">');
+							$('#chart').append('<input type="hidden" name="total" value="'+tot+'">');
+							$('#chart').append('<input type="hidden" name="count" value="'+cou+'">');
 							$('#chart').submit();
 						});
 					{% for i in chart %}
@@ -162,7 +177,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					var total = 0;
 					sc.find('selected').each(function () {
 						
-						total += price;
+						//total += price;
 						
 					});
 							
@@ -170,7 +185,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				}
 			</script>
 	</div>
-	<p class="copy_rights">&copy; 2016 Movie Ticket Booking Widget. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank"> W3layouts</a></p>
 </div>
 <script src={% static "js/jquery.nicescroll.js" %}></script>
 <script src={% static "js/scripts.js" %}></script>

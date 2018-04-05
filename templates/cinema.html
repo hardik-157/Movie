@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title>Movie</title>
+	<link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src={% static "js/jquery-3.3.1.min.js" %}></script>
+	<script src={% static "js/c_home/materialize.min.js" %}></script>
+<script>
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+	$('.tabs').tabs();
+  });
+</script>
+</head>
+<body>
+<nav>
+		<div class="nav-wrapper">
+			<a href="#!" class="brand-logo">&nbsp Home</a>
+			<ul class="right hide-on-med-and-down">
+				<li class="waves-effect waves-light"><a href="/home/">Home</a></li>
+				<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
+				<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li>
+				<li class="waves-effect waves-light"><a href="/home/contact/">Contact Us</a></li>
+				<li class="waves-effect waves-light"><a href="/home/about/">About Us</a></li>
+				<li class="active waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li>
+				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+			</ul>
+		</div>
+	</nav><br><br><br>
+	<h3>Choose your nearest cinema:</h3>
+<ul class="collapsible">	
+	{% for key,value in city.items %}
+		<li>
+			<div class="collapsible-header"><i class="material-icons">movie</i>{{ key }}</div>
+			{% for i in value %}
+				<div class="collapsible-body"><a href='/home?cid={{ i.cinema_id }}'><span>{{ i.cinema_name }}</span></a></div>
+			{% endfor %}
+		</li>
+	{% endfor %}
+	</ul>
+</body>
+</html>

@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +24,7 @@ SECRET_KEY = 'p88vqorcl=ctz6s@7#&v#smoof2)a*k=ap1cc-+mfilswey!vk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.43.243','127.0.0.1']
 
 STATIC_URL = '/static/'
 
@@ -44,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
     'home.apps.HomeConfig',
-	'book.apps.BookConfig',
+    'CinemaAdmin.apps.CinemaadminConfig',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'hardik',
-		'USER': 'hardik',
-		'PASSWORD': '',
+	'USER': 'hardik',
+	'PASSWORD': '',
     }
 }
 

@@ -15,4 +15,5 @@ urlpatterns = [
     path('update/',views.update),
     path('updateProfile/',views.updateProfile),
     path('updatePassword/',views.update),
+    path('updatePasswordCin/',views.updatePassword),
 ]

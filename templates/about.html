@@ -1,174 +1,28 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 {% load static %}
-<head>
-<title>About As</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href={% static "css/home/style.css" %} type="text/css" media="all" />
-<script src={% static 'js/home/jquery.min.js' %}></script>
-<script src={% static 'js/home/jquery.color-RGBa-patch.js' %}></script>
-<script src={% static 'js/home/example.js' %}></script>
+<head><title>Movie</title>
+<link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<script src={% static "js/c_home/materialize.min.js" %}></script>
 </head>
 <body>
-<div class="header">
-	<div class="header-top">
-		<div class="wrap">
-			<div class="banner-no">
-		  		<img src={% static "images/home/banner-no.png" %} alt=""/>
-		    </div>
-			  <div class="nav-wrap">
-					<ul class="group" id="example-one">
-			            <li class="current_page_item"><a href="/home/">Home</a></li>
-			  		   <li><a href="/home/movieandevents/">Movies & Events</a></li>
-					   <li><a href="/home/profile/">User Profile</a></li>
-			  		   <li><a href="/home/contact/">Contact</a></li>
-					   <li><a href="/home/about/">About</a></li>
-					   <li><a href="/login/logout/">Logout</a></li>
-			        </ul>
-			  </div>
- 			<div class="clear"></div>
-   		</div>
-    </div>
-<div class="block">
-	<div class="wrap">
-		<div class="h-logo">
-			<a href="index.html"><img src={% static "images/home/logo.png" %} alt=""/></a>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#!" class="brand-logo">&nbsp About</a>
+			<ul class="right hide-on-med-and-down">
+				<li class="waves-effect waves-light"><a href="/home/">Home</a></li>
+				<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
+				<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li>
+				<li class="waves-effect waves-light"><a href="/home/contact/">Contact Us</a></li>
+				<li class="active waves-effect waves-light"><a href="#">About Us</a></li>
+				<li class="waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li>
+				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+			</ul>
 		</div>
-        <form action="#" id="reservation-form">
-		       <fieldset>
-		                <div class="field">
-			                 <label>Find a Movie:</label>
-			                  <select class="select2">
-			                    <option>Movie list</option>
-			                  </select>
-			            </div>
-		                <div class="field1">
-			                   <label>Search</label>
-			                  <select class="select1">
-			                    <option>Movies or Actors</option>
-			                  </select>
-		                </div>
-		       </fieldset>
-            </form>
-            <div class="clear"></div>
-   </div>
-</div>
-</div>
-<div class="content">
-	<div class="wrap">
-		<div class="content-top">
-				<div class="section group">
-					<div class="about span_1_of_2">	
-						<h3>Latest Movies</h3>	
-							<div class="about-top">	
-								<div class="grid images_3_of_2">
-									<img src="images/pic13.jpg" alt=""/>
-								</div>
-								<div class="desc span_3_of_2">
-									<h4>Lorem Ipsum is simply dummy text </h4>
-									<p class="p-link"><a href="#" class="link1">Lorem ipsum, Dolor </a></p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									<a href="#" class="watch_but">Watch in HD</a>
-								</div>
-								<div class="clear"></div>
-							</div>
-							<div class="about-top">	
-								<div class="grid images_3_of_2">
-									<img src="images/pic14.jpg" alt=""/>
-								</div>
-								<div class="desc span_3_of_2">
-									<h4>Lorem Ipsum is simply dummy text </h4>
-									<p class="p-link"><a href="#" class="link1">Lorem ipsum, Dolor </a></p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-								</div>
-								<div class="clear"></div>
-							</div>
-							<a href="#" class="watch_but">More Movies</a>
-					</div>			
-				<div class="rightsidebar span_3_of_1">
-						<h3>Most Premieres</h3>	
-						<div class="small_box premier">
-	                    	<a href="#" class="col"><img src={% static "images/home/pic15.jpg" %} width="76" height="112" alt=""><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a>
-	                    	<a href="#" class="col"><img src={% static "images/home/pic16.jpg" %} width="76" height="112" alt=""><br>Lorem ipsum dolor sit amet, consectetuer</a>
-	                        <a href="#" class="col"><img src={% static "images/home/pic17.jpg"%} width="76" height="112" alt=""><br>Lorem ipsum dolor sit amet, consec</a>
-	                        <div class="clear"></div>
-							<a href="#" class="button ">See all</a>
-                    	</div>
-                    <h3>Latest News</h3>	
-                    <ul class="latest_news">
-                        	<li>
-                            	<span class="date">05 July, 2013</span><br>
-                            	<a href="#">dolore eu feugiat nulla facilisis at vero eros ..</a>
-                            </li>
-                            <li>
-                            	<span class="date">05 July, 2013</span><br>
-                            	<a href="#">dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit</a>
-                            </li>
-                            <li class="m_bottom">
-                            	<span class="date">05 July, 2013</span><br>
-                            	<a href="#">dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit</a>
-                            </li>
-                           
-                        </ul>
-                        <a href="#" class="button ">See all</a>
- 				</div>
-			</div>
-				<div class="clear"></div>		
-			</div>
-	</div>
-</div>
-<div class="footer">
-	<div class="wrap">
-			<div class="footer-top">
-				<div class="col_1_of_4 span_1_of_4">
-					<div class="footer-nav">
-		                <ul>
-		                   <li><a href="#">Our Tips of gallery Template diam</a></li>
-		                    <li><a href="#">Our Tips of gallery Template diam</a></li>
-		                     <li><a href="#">Our Tips of gallery Template diam</a></li>
-		                       <li><a href="#">Our Tips of gallery Template diam</a></li>
-		                   </ul>
-		              </div>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<div class="textcontact">
-						<p>consectetuer adipiscing elit,<br>
-						consectetuer<br>
-						Ph: +1-800-234-52589.<br>
-						Email : <a href="mailto:example@mail.com">mail@example.com</a><br>
-						</p>
-					</div>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<div class="call_info">
-						<p class="txt_3">Call us toll free:</p>
-						<p class="txt_4">1 800 234 23456</p>
-					</div>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<div class=social>
-						<a href="#"><img src={% static "images/home/fb.png" %} alt=""/></a>
-						<a href="#"><img src={% static "images/home/tw.png" %} alt=""/></a>
-						<a href="#"><img src={% static "images/homedribble.png" %} alt=""/></a>
-						<a href="#"><img src={% static "images/home/pinterest.png" %} alt=""/></a>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
-	<div class="footer-bottom">
-	<div class="wrap">
-	<div class="copy">
-		<p>© 2013 Movie | Design by CE119,CE120,CE121</p>
-	</div>
- 	</div>
-</div>
+	</nav>
+	<br>
+	<br>
 </body>
-</html>
+<>

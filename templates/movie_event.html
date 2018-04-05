@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title>Movie</title>
+	<link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src={% static "js/c_home/materialize.min.js" %}></script>
+</head>
+<body>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#!" class="brand-logo">&nbsp Movies & Events</a>
+			<ul class="right hide-on-med-and-down">
+				<li class="waves-effect waves-light"><a href="/home/">Home</a></li>
+				<li class="active waves-effect waves-light"><a href="/home/movieandevents/">Movies & Events</a></li>
+				<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
+				<li class="waves-effect waves-light"><a href="/home/contact/">Contact Us</a></li>
+				<li class="waves-effect waves-light"><a href="/home/about/">About Us</a></li>
+				<li class="waves-effect waves-light"><a href="/home/location/">Cinema</a></li>
+				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+</body>
+</html>

@@ -17,3 +17,9 @@ def modulo(value, arg):
 def mul(value, arg):
 	return int(int(value)*int(arg))
 
+@register.filter
+def update(value,arg):
+	print(value)
+	value[arg]=1;
+	print(value)
+	return value

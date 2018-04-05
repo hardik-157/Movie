@@ -57,9 +57,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<form id="chart" action="/book/ticket/" method="POST">{% csrf_token %}
 		</form>
 			<script type="text/javascript">
+				
+				String.prototype.replaceAt=function(index, replacement) {
+					return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+				}
 				var price='{{price1}}';	//price
 				var price2='{{price2}}';
 				var str='{{chart}}';
+				console.log(str);
 				$(document).ready(function() {
 					var $cart = $('#selected-seats'), //Sitting Area
 					$counter = $('#counter'), //Votes
@@ -91,7 +96,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								[ 'a', 'selected', 'Selected']
 							]					
 						},
-						
 						click: function () { //Click event
 							if (this.status() == 'available') { //optional seat
 								$('<li>Row'+(this.settings.row+1)+' Seat'+this.settings.label+'</li>')
@@ -102,7 +106,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								
 								$counter.text(sc.find('selected').length+1);
 								$total.text(recalculateTotal(sc)+price);
-									
+								str = str.replaceAt(this.settings.row*10+this.settings.label-1,"1");
+								console.log(str);
+								//document.write(temp);
 								return 'selected';
 							} else if (this.status() == 'selected') { //Checked
 									//Update Number
@@ -112,6 +118,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										
 									//Delete reservation
 									$('#cart-item-'+this.settings.id).remove();
+									str = str.replaceAt(this.settings.row*10+this.settings.label-1,"0");
+									console.log(str);
 									//optional
 									return 'available';
 							} else if (this.status() == 'unavailable') { //sold

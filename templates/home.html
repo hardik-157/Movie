@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src={% static "js/c_home/materialize.min.js" %}></script>
 <script src={% static "js/jquery-3.3.1.min.js" %}></script>
-
 <style>
 table {
 	border-collapse: collapse;
@@ -26,7 +25,6 @@ table {
 				<li class="active waves-effect waves-light"><a href="#">Home</a></li>
 				<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
 				<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li>
-				<li class="waves-effect waves-light"><a href="/home/contact/">Contact Us</a></li>
 				<li class="waves-effect waves-light"><a href="/home/about/">About Us</a></li>
 				<li class="waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li>
 				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
@@ -48,11 +46,11 @@ table {
 					</div>
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">{{ value.0 }}<i class="material-icons right">more_vert</i></span>
-						<a href='/home/movie?key={{ key }}' class="waves-effect waves-light btn pulse">Book ticket</a>
 					</div>
 					<div class="card-reveal">
 						<span class="card-title grey-text text-darken-4">{{ value.0 }}<i class="material-icons right">close</i></span>
 						<p>{{ value.1 }}</p>
+						<a href='/home/movie?key={{ key }}' class="waves-effect waves-light btn pulse">Book ticket</a>
 					</div>
 				</div>
 			</div>	
@@ -80,5 +78,28 @@ table {
 			</div>	
 		{% endfor %}
 	</div>
+	<footer class="page-footer blue-grey darken-4">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Movie.com</h5>
+                <p class="grey-text text-lighten-4">This is the Django project for online movie ticket booking system.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">References for Designs</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Materializecss.com</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Google Material Web Design</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">W3School.com</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2018 all rights are reserved.
+            </div>
+          </div>
+        </footer>
 </body>
 </html>

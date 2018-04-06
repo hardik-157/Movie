@@ -135,8 +135,8 @@ to {
 						<div class="wrap-input100 validate-input m-b-16"
 							data-validate="Please enter your date 0f birth">
 							<input class="input100" type="date" name="date"
-								placeholder="Date Of Birth" required> <span
-								class="focus-input100"></span>
+								placeholder="Date Of Birth"> <span
+								class="focus-input100" required></span>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16"
 							data-validate="Please enter password">
@@ -146,8 +146,8 @@ to {
 						<div class="wrap-input100 validate-input"
 							data-validate="Please re-enter password">
 							<input class="input100" type="password" name="password2"
-								placeholder="Re-enter Password" required> <span
-								class="focus-input100"></span>
+								placeholder="Re-enter Password"> <span
+								class="focus-input100" required></span>
 						</div>
 
 						<div class="container-login100-form-btn">
@@ -183,7 +183,7 @@ to {
 						<span class="login100-form-title"> Cinema Management Sign Up </span> 
 						{% for field in form %} 
 						{% for error in field.errors %}
-						{{error}}<br> 
+						<h6 style="color: red">{{error}}</h6><br>
 						{% endfor %} 
 						{% endfor %}
 						<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
@@ -204,8 +204,8 @@ to {
 								placeholder="City" required> <span class="focus-input100"></span>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter your address">
-							<textarea class="input100" name="address" placeholder="address" required></textarea>
-							<span class="focus-input100"></span>
+							<textarea class="input100" name="address" placeholder="address"></textarea>
+							<span class="focus-input100" required></span>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter password">
 							<input class="input100" type="password" name="password1" placeholder="Password" required> <span class="focus-input100"></span>

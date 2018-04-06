@@ -7,9 +7,8 @@ from django.contrib.auth.decorators import login_required
 from login.models import *
 from django.contrib.auth import *
 from django.contrib.auth.models import User
-
 @login_required(login_url = '/login/')
-def location(request):
+def location(request): #view for getting users location...
     c = {}
     c.update(csrf(request))
     cty = {}
@@ -22,44 +21,50 @@ def location(request):
     return render(request,'location.html',c)
 
 @login_required(login_url = '/login/')
-def cinema(request):
-    c = {}
-    c.update(csrf(request))
-    cty = {}
-    city_ob = City.objects.all()
-    for ci in city_ob:
-        cin_list = Cinema.objects.filter(city = ci.city)
-        cty[str(ci.city)] = cin_list
-    c['city'] = cty
-    c['test'] = city_ob
-    return render(request,'cinema.html',c)
+
+def cinema(request): #view for changing the location...
+	c = {}
+	c.update(csrf(request))
+	cty = {}
+	city_ob = City.objects.all()
+	for ci in city_ob:
+		cin_list = Cinema.objects.filter(city = ci.city)
+		request.session['cin_id']=cin_list[0].cinema_id;
+		print(request.session['cin_id'])
+		cty[str(ci.city)] = cin_list
+	c['city'] = cty
+	c['test'] = city_ob
+	return render(request,'cinema.html',c)
 
 @login_required(login_url = '/login/')
-def home(request):
-    c={}
-    movies = {}
-    cid = request.GET.get('cid','')
-    if (cid!=''):
-        request.session['cinema_id'] = cid
-    cin_id = request.session['cinema_id']
-    mov = Movie.objects.filter(cinema_id = cin_id)
-    for i in mov:
-        l = [i.movie_name,i.movie_details]
-        movies[i.movie_id] = l
-    c['movies'] = movies
-    offers = {}
-    off = Offers.objects.filter(cinema_id = cin_id)
-    for j in off:
-        offers[j.offer_name] = j.offer_details
-    c['offers'] = offers
-    c.update(csrf(request))
-    if request.user.is_authenticated:
-        return render(request,'home.html',c)
-    else:
-        return HttpResponseRedirect('/login/invalidlogin')
+
+def home(request): #home page view for user...
+	c={}
+	movies = {}
+	cid = request.GET.get('cid','')
+	if (cid!=''):
+		request.session['cinema_id'] = cid
+	cin_id = request.session['cinema_id']
+	mov = Movie.objects.filter(cinema_id = cin_id)
+	for	i in mov:
+		l = [i.movie_name,i.movie_details]
+		movies[i.movie_id] = l
+	c['movies'] = movies
+	offers = {}
+	off = Offers.objects.filter(cinema_id = cin_id)
+	for j in off:
+		if j.offer_name!="default":
+			offers[j.offer_name] = j.offer_details
+	c['offers'] = offers
+	c.update(csrf(request))
+	if request.user.is_authenticated:
+		return render(request,'home.html',c)
+	else:
+		return HttpResponseRedirect('/login/invalidlogin')
 
 @login_required(login_url = '/login/')
-def about(request):
+
+def about(request): #view for about page...
     c={}
     c.update(csrf(request))
     if request.user.is_authenticated:
@@ -68,7 +73,8 @@ def about(request):
         return HttpResponseRedirect('/login/invalidlogin')
 
 @login_required(login_url = '/login/')
-def contact(request):
+
+def contact(request): #view for contact page
     c={}
     c.update(csrf(request))
     if request.user.is_authenticated:
@@ -77,7 +83,8 @@ def contact(request):
         return HttpResponseRedirect('/login/invalidlogin')
 
 @login_required(login_url = '/login/')
-def profile(request):
+
+def profile(request): #view to display user profile...
     c={}
     c.update(csrf(request))
     if request.user.is_authenticated:
@@ -104,13 +111,15 @@ def profile(request):
         return HttpResponseRedirect('/login/invalidlogin')
 
 @login_required(login_url = '/login/')
-def editPassword(request):
+
+def editPassword(request): #view for password edit page...
     c = {}
     c.update(csrf(request))
     return render(request,'update_password.html',c)
     
 @login_required(login_url = '/login/')
-def editProfile(request):
+
+def editProfile(request): #view for profile edit page...
     c={}
     c.update(csrf(request))
     if request.user.is_authenticated:
@@ -139,26 +148,20 @@ def editProfile(request):
         return HttpResponseRedirect('/login/invalidlogin')
 
 @login_required(login_url = '/login/')
-def movieandevent(request):
-    c={}
-    c.update(csrf(request))
-    if request.user.is_authenticated:
-        return render(request,'movie_event.html',c)
-    else:
-        return HttpResponseRedirect('/login/invalidlogin')
 
-@login_required(login_url = '/login/')
-def movie(request):
-    c = {}
-    c.update(csrf(request))
-    key = request.GET.get('key','')
-    request.session['movie_id'] =  int(key)
-    movie = Movie.objects.filter(movie_id = int(key))
-    cid = request.session['cinema_id']
-    offer = Offers.objects.filter(cinema_id = cid)
-    show = Show.objects.filter(cinema_id = cid,movie_id = int(key))
-    c['offer'] = offer
-    c['show'] = show
-    c['movie_name'] = movie[0].movie_name
-    c['movie_details'] = movie[0].movie_details
-    return render(request,'movie.html',c)
+def movie(request): #view for showing showa and movie details...
+	c = {}
+	c.update(csrf(request))
+	key = request.GET.get('key','')
+	request.session['movie_id'] =  int(key)
+	movie = Movie.objects.filter(movie_id = int(key))
+	cid = request.session['cinema_id']
+	offer = Offers.objects.filter(cinema_id = cid)
+	show = Show.objects.filter(cinema_id = cid,movie_id = int(key))
+	print(request.session['cinema_id'])
+	c['offer'] = offer
+	c['show'] = show
+	c['movie_name'] = movie[0].movie_name
+	c['movie_details'] = movie[0].movie_details
+	c['default']="default"
+	return render(request,'movie.html',c)

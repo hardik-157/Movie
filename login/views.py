@@ -9,15 +9,15 @@ from django.contrib.auth import *
 from login.forms import *
 from django.contrib.auth.forms import PasswordChangeForm
 
-def login1(request):
+def login1(request): #view for login page...
 	c ={}
 	c.update(csrf(request))
 	return render(request,'index.html',c)
-def restore(request):
+def restore(request): #view for password recovery page...
         c={}
         c.update(csrf(request))
         return render(request,'restore.html',c)
-def updateProfile(request):
+def updateProfile(request): #view for inserting profile data in to databse...
         c = {}
         c.update(csrf(request))
         name= request.POST.get('name','')
@@ -41,7 +41,7 @@ def updateProfile(request):
                 return HttpResponseRedirect('/home/profile')
         else:
                 return HttpResponseRedirect('/login/invalidlogin')
-def updatePassword(request):
+def updatePassword(request): #view to update the password in database...
 	c={}
 	c.update(csrf(request))
 	id = request.user.id
@@ -60,7 +60,7 @@ def updatePassword(request):
 		#return render(request,'home.hmtl',c)
 	return render(request,'cinema-home.html',c)
 
-def update(request):
+def update(request): #view to update the password in databse...
 	c={}
 	c.update(csrf(request))
 	id = request.user.id
@@ -78,7 +78,7 @@ def update(request):
                 return render(request,'home.html',c)
 		#return render(request,'home.hmtl',c)
 	return render(request,'home.html',c)
-def recover(request):
+def recover(request): #view to diaspalay the password after successfull recovery...
         c={}
         c.update(csrf(request))
         username = request.POST.get('username')
@@ -100,7 +100,7 @@ def recover(request):
         c['msg'] = password
         return render(request,'restore.html',c)
 
-def auth_view(request):
+def auth_view(request): #view to aquthenticate the user...
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)
@@ -116,31 +116,31 @@ def auth_view(request):
 
 @login_required(login_url = '/login/')
 
-def loggedin(request):
+def loggedin(request): #view for redirecting valid user to home page...
 	if request.user.is_authenticated:
 		return HttpResponseRedirect('/home/location/')
 	else:
 		return HttpResponseRedirect('/login/invalidlogin/')
 
-def invalidlogin(request):
+def invalidlogin(request): #view to redirect the invalid user to login page...
 	c ={}
 	c.update(csrf(request))
 	c['q']="Invalid UserName or PassWord"
 	return render(request,'index.html',c)
 	
-def signUp(request):
+def signUp(request): #view to show the signup page...
 	c ={}
 	c.update(csrf(request))
 	c['role'] = 'member'
 	return render(request,'signup.html',c)
 
-def store(request):
+def store(request): #view to store the new user data in to datbase...
 	username= request.POST.get('username', '')
 	name= request.POST.get('name','')
 	password1= request.POST.get('password1', '')
 	password2= request.POST.get('password2', '')
 	email= request.POST.get('email','')
-	phone= int(request.POST.get('phone', ''))
+	phone= request.POST.get('phone', '')
 	date= request.POST.get('date', '')
 	c ={}
 	c.update(csrf(request))
@@ -149,7 +149,6 @@ def store(request):
 	c['role'] = 'member'
 	if form.is_valid():
 			profile= Puser(user_id=username,user_name=name,email=email,phoneno=phone,bdate=date,password=password1)
-			print(profile.phoneno)
 			profile.save()
 			form.save()
 			username = form.cleaned_data.get('username')
@@ -159,7 +158,7 @@ def store(request):
 			return render(request,'home.html')
 	return render(request,'signup.html',c)
 
-def cinstore(request):
+def cinstore(request): #view to store the new cinema profile in to the databse...
 	username = request.POST.get('username', '')
 	name = request.POST.get('name','')
 	password1 = request.POST.get('password1', '')
@@ -176,7 +175,9 @@ def cinstore(request):
 	if form.is_valid():
 			profile= Cinema(cinema_id=username,cinema_name=name,email=email,phoneno=phone,password=password1,address=address,city=city)
 			profile.save()
+			offer = Offers(cinema_id=profile,offer_name="default",offer_details="default")
 			form.save()
+			offer.save()
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
@@ -188,6 +189,6 @@ def cinstore(request):
 			return render(request,'cinema-home.html')
 	return render(request,'signup.html',c)
 	
-def logout(request):
+def logout(request): #view for log out the user...
 	auth.logout(request)
 	return render(request,'index.html')

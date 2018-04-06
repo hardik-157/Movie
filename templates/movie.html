@@ -25,7 +25,6 @@
 				<li class="waves-effect waves-light"><a href="/home/">Home</a></li>
 				<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
 				<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li>
-				<li class="waves-effect waves-light"><a href="/home/contact/">Contact Us</a></li>
 				<li class="waves-effect waves-light"><a href="/home/about/">About Us</a></li>
 				<li class="waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li>				
 				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
@@ -71,7 +70,9 @@
 				<select name="fid">
 					<option value="" disabled selected>Select offer for {{ movie_name }}</option>
 					{% for i in offer %}
-						<option value="{{ i.offer_id }}">{{ i.offer_name }}</option>
+						{% ifnotequal i.offer_name default %}
+							<option value="{{ i.offer_id }}">{{ i.offer_name }}</option>
+						{% endifnotequal %}
 					{% endfor %}
 				</select>
 				<div class="input-field col s6">
@@ -82,5 +83,31 @@
 	</div>
     <div id="t3" class="col s12">Test 3</div>
   </div>
+  <br>
+	<div style="bottom: 0; position: relative; width: 100%;">
+	<footer class="page-footer blue-grey darken-4">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Movie.com</h5>
+                <p class="grey-text text-lighten-4">This is the Django project for online movie ticket booking system.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">References for Designs</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Materializecss.com</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Google Material Web Design</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">W3School.com</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2018 all rights are reserved.
+            </div>
+          </div>
+        </footer>
+	</div>
 </body>
 </html>

@@ -14,6 +14,18 @@
   });
 </script>
 </head>
+<script>
+window.onload=function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem( 'firstLoad' ) )
+    {
+      localStorage[ 'firstLoad' ] = true;
+    }  
+  }
+};
+</script>
 <body>
 <nav>
 		<div class="nav-wrapper">

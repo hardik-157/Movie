@@ -15,8 +15,24 @@
 <link href={% static "css/style.css" %} rel="stylesheet" type="text/css" media="all" />
 <script src={% static "js/jquery-1.11.0.min.js" %}></script>
 <script src={% static "js/jquery.seat-charts.js" %}></script>
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Expires" CONTENT="-1">
 </head>
 <body>
+<script type='text/javascript'>
+window.onload=function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem( 'firstLoad' ) )
+    {
+      localStorage[ 'firstLoad' ] = true;
+	  window.history.go(-1);
+    }  
+  }
+};
+
+</script>
 <div class="content">
 	<div class="main">
 		<div class="demo">
@@ -157,10 +173,17 @@
 									alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
 								}
 							});*/
-							$('#chart').append('<input type="hidden" name="chart" value="'+str+'">');
-							$('#chart').append('<input type="hidden" name="total" value="'+tot+'">');
-							$('#chart').append('<input type="hidden" name="count" value="'+cou+'">');
-							$('#chart').submit();
+							if(cou==0)
+							{
+								alert("Please book any Ticket");
+							}
+							else
+							{
+								$('#chart').append('<input type="hidden" name="chart" value="'+str+'">');
+								$('#chart').append('<input type="hidden" name="total" value="'+tot+'">');
+								$('#chart').append('<input type="hidden" name="count" value="'+cou+'">');
+								$('#chart').submit();
+							}
 						});
 					{% for i in chart %}
 						{% ifequal i com %}

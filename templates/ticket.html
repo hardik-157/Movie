@@ -8,6 +8,7 @@
 		<script src={% static "js/jquery-3.3.1.min.js" %}></script>
 		<script src={% static "js/c_home/materialize.min.js" %}></script>
 	</head>
+	
 	<body>
 	<nav>
 		<div class="nav-wrapper">
@@ -22,6 +23,15 @@
 			</ul>
 		</div>
 	</nav>
+	<script type='text/javascript'>
+		window.onload=function()
+		{
+		  if( window.localStorage )
+		  {
+			localStorage.removeItem( 'firstLoad' );			
+		  }
+		};
+		</script>
 	<br><br><br>
 		<div class="row">
 			<div class="col s12">

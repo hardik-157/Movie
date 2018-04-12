@@ -44,6 +44,8 @@ def home(request): #home page view for user...
 	cid = request.GET.get('cid','')
 	if (cid!=''):
 		request.session['cinema_id'] = cid
+	else:
+		return HttpResponseRedirect('/home/location/')
 	cin_id = request.session['cinema_id']
 	mov = Movie.objects.filter(cinema_id = cin_id)
 	for	i in mov:
@@ -153,12 +155,15 @@ def movie(request): #view for showing showa and movie details...
 	c = {}
 	c.update(csrf(request))
 	key = request.GET.get('key','')
+	if key=="":
+		return HttpResponseRedirect('/home/location/')
+	if 'cinema_id' not in request.session:
+		return HttpResponseRedirect('/home/location/')
 	request.session['movie_id'] =  int(key)
 	movie = Movie.objects.filter(movie_id = int(key))
 	cid = request.session['cinema_id']
 	offer = Offers.objects.filter(cinema_id = cid)
 	show = Show.objects.filter(cinema_id = cid,movie_id = int(key))
-	print(request.session['cinema_id'])
 	c['offer'] = offer
 	c['show'] = show
 	c['movie_name'] = movie[0].movie_name

@@ -14,6 +14,8 @@ from login.forms import *
 def seats(request): #to show the seat arrengments...
 		c={}
 		c.update(csrf(request))
+		if 'cinema_id' not in request.session:
+			return HttpResponseRedirect('/home/location')
 		sid = request.POST.get('sid','')
 		fid = request.POST.get('fid')
 		movie_name = request.POST.get('movie_name')
@@ -50,6 +52,8 @@ def bookings(request): #to show all the bookings done by user...
 def book(request): #to store the booking data in to database...
 	c={}
 	c.update(csrf(request))
+	if 'cinema_id' not in request.session:
+		return HttpResponseRedirect('/home/location')
 	sid = request.session['sid']
 	fid = request.session['fid']
 	show = Show.objects.get(show_id = sid)
@@ -71,21 +75,23 @@ def book(request): #to store the booking data in to database...
 	return HttpResponseRedirect('/book/ticket/')
 @login_required(login_url = '/login/')
 def ticket(request): #to display the ticket details after successfull booking...
-        c = {}
-        c.update(csrf(request))
-        ticket_id = request.session['ticket_id']
-        ticket = Ticket.objects.get(ticket_id = int(ticket_id))
-        c['ticket_id'] = ticket.ticket_id
-        c['seat'] = ticket.seat
-        c['price'] = ticket.price
-        #show = Show.objects.get(show_id = ticket.show_id)
-        show = ticket.show_id
-        c['show_time'] = show.time
-        #movie = Movie.objects.get(movie_id = show.movie_id)
-        movie = show.movie_id
-        c['movie_name'] = movie.movie_name
-        #cinema = Cinema.objects.get(cinema_id = show.cinema_id)
-        cinema = show.cinema_id
-        c['cinema_name'] = cinema.cinema_name
-        return render(request,'ticket.html',c)
+		c = {}
+		c.update(csrf(request))
+		if 'cinema_id' not in request.session:
+			return HttpResponseRedirect('/home/location')
+		ticket_id = request.session['ticket_id']
+		ticket = Ticket.objects.get(ticket_id = int(ticket_id))
+		c['ticket_id'] = ticket.ticket_id
+		c['seat'] = ticket.seat
+		c['price'] = ticket.price
+		#show = Show.objects.get(show_id = ticket.show_id)
+		show = ticket.show_id
+		c['show_time'] = show.time
+		#movie = Movie.objects.get(movie_id = show.movie_id)
+		movie = show.movie_id
+		c['movie_name'] = movie.movie_name
+		#cinema = Cinema.objects.get(cinema_id = show.cinema_id)
+		cinema = show.cinema_id
+		c['cinema_name'] = cinema.cinema_name
+		return render(request,'ticket.html',c)
 	

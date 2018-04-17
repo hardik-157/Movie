@@ -24,11 +24,11 @@ SECRET_KEY = 'p88vqorcl=ctz6s@7#&v#smoof2)a*k=ap1cc-+mfilswey!vk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 '''
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG', default=False, cast=bool)
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        default=os.environ.get('DATABASE_URL')
     )
 }
 

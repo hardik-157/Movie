@@ -19,11 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-'''# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'p88vqorcl=ctz6s@7#&v#smoof2)a*k=ap1cc-+mfilswey!vk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 '''
 SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DEBUG']
@@ -32,8 +33,8 @@ DATABASES = {
         default=os.environ['DATABASE_URL']
     )
 }
-
-ALLOWED_HOSTS = ['192.168.43.243','127.0.0.1', 'mymovie1.herokuapp.com']
+'''
+ALLOWED_HOSTS = ['10.80.188.54','127.0.0.1', 'mymovie1.herokuapp.com']
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
@@ -91,7 +92,7 @@ WSGI_APPLICATION = 'Movie.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -101,7 +102,6 @@ DATABASES = {
     }
 }
 
-'''
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

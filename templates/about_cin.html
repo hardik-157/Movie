@@ -6,11 +6,18 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <script src={% static "js/c_home/materialize.min.js" %}></script>
+
+<link rel="stylesheet" href={% static "css/home/materialize.css" %} type="text/css" media="all" />
+<link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src={% static "js/newhome/materialize.js" %}></script>
+<script src={% static "js/newhome/init.js" %}></script>
 </head>
 <body>
 	<nav>
 		<div class="nav-wrapper">
-			<a href="#!" class="brand-logo"> &nbsp Cinema Admin Panel</a>
+			<a href="#!" class="brand-logo"> &nbsp About Us</a>
+			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
 				<li class="waves-effect waves-light"><a href="/CinemaAdmin/home/">Admin Panel</a></li>
 				<li class="waves-effect waves-light"><a href="/CinemaAdmin/profile/">Cinema Profile</a></li>
@@ -19,9 +26,15 @@
 			</ul>
 		</div>
 	</nav>
+	<ul class="sidenav" id="nav-mobile">
+				<li class="waves-effect waves-light"><a href="/CinemaAdmin/home/">Admin Panel</a></li>
+				<li class="waves-effect waves-light"><a href="/CinemaAdmin/profile/">Cinema Profile</a></li><br>
+				<li class="waves-effect waves-light active"><a href="#">About Us</a></li><br>
+				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+			</ul>
 	<br>
 	<br>
-	<div style="bottom: 0; position: relative; width: 100%;">
+	<div style="bottom: 0; position: absolute; width: 100%;">
 	<footer class="page-footer blue-grey darken-4">
           <div class="container">
             <div class="row">

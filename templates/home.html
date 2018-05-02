@@ -3,11 +3,11 @@
 {% load static %}
 <head>
 <title>Movie</title>
+<link rel="stylesheet" href={% static "css/home/materialize.css" %} type="text/css" media="all" />
 <link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src={% static "js/c_home/materialize.min.js" %}></script>
-<script src={% static "js/jquery-3.3.1.min.js" %}></script>
+
 <style>
 table {
 	border-collapse: collapse;
@@ -27,13 +27,17 @@ window.onload=function()
       localStorage[ 'firstLoad' ] = true;
     }  
   }
+ 
 };
+
 </script>
 <body>
-	<nav>
-		<div class="nav-wrapper">
-			<a href="#!" class="brand-logo">&nbsp Home</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
+	<nav role="navigation">
+		
+		<div class="nav-wrapper container">
+			<a id="logo-container" href="#!" class="brand-logo">&nbsp Home</a>
+			
+			<ul class="right hide-on-med-and-down">
 				<li class="active waves-effect waves-light"><a href="#">Home</a></li>
 				<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li>
 				<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li>
@@ -41,17 +45,29 @@ window.onload=function()
 				<li class="waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li>
 				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
 			</ul>
+			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 		</div>
+		
 	</nav>
+	<ul id="nav-mobile" class="sidenav">
+			<li class="active waves-effect waves-light"><a href="#">Home</a></li><br>
+			<li class="waves-effect waves-light"><a href="/home/profile/">Profile</a></li><br>
+			<li class="waves-effect waves-light"><a href="/book/bookings/">Bookings</a></li><br>
+			<li class="waves-effect waves-light"><a href="/home/about/">About Us</a></li><br>
+			<li class="waves-effect waves-light"><a href="/home/cinema/">Cinema</a></li><br>
+			<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+	</ul>
+	
 	<br>
 	<br>
-	<br>	
+	<br>
+	
 	<div class="row card blue-grey darken-1">
 		<div class="card-content white-text">
 			<span class="card-title"><h3>Movies</h3> 
 		</div>
 		{% for key,value in movies.items %}
-			<div class="col s3">
+			<div  class="col s11 m3">
 				<div class="card small">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator" src={%static "images/cin_home/sample-1.jpg"%}>
@@ -65,7 +81,7 @@ window.onload=function()
 						<a href='/home/movie?key={{ key }}' class="waves-effect waves-light btn pulse">Book ticket</a>
 					</div>
 				</div>
-			</div>	
+			</div>
 		{% endfor %}
 	</div>
 	<br>
@@ -74,7 +90,7 @@ window.onload=function()
 			<span class="card-title"><h3>Offers</h3> 
 		</div>
 		{% for key,value in offers.items %}
-			<div class="col s3">
+			<div class="col s12 m3">
 				<div class="card small">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator" src={%static "images/cin_home/sample-1.jpg"%}>
@@ -113,5 +129,8 @@ window.onload=function()
             </div>
           </div>
         </footer>
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src={% static "js/newhome/materialize.js" %}></script>
+		<script src={% static "js/newhome/init.js" %}></script>
 </body>
 </html>

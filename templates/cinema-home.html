@@ -14,11 +14,18 @@ table {
 	border: 1px solid #ddd;
 }
 </style>
+
+<link rel="stylesheet" href={% static "css/home/materialize.css" %} type="text/css" media="all" />
+<link rel="stylesheet" href={% static "css/c_home/materialize.css" %} type="text/css" media="all" />
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src={% static "js/newhome/materialize.js" %}></script>
+<script src={% static "js/newhome/init.js" %}></script>
 </head>
 <body>
 	<nav>
 		<div class="nav-wrapper">
-			<a href="#!" class="brand-logo"> &nbsp Cinema Admin Panel</a>
+			<a href="#!" class="brand-logo"> &nbsp Home</a>
+			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
 				<li class="waves-effect waves-light active"><a href="#">Admin Panel</a></li>
 				<li class="waves-effect waves-light"><a href="/CinemaAdmin/profile/">Cinema Profile</a></li>
@@ -27,6 +34,12 @@ table {
 			</ul>
 		</div>
 	</nav>
+	<ul class="sidenav" id="nav-mobile">
+				<li class="waves-effect waves-light active"><a href="#">Admin Panel</a></li>
+				<li class="waves-effect waves-light"><a href="/CinemaAdmin/profile/">Cinema Profile</a></li><br>
+				<li class="waves-effect waves-light"><a href="/CinemaAdmin/about/">About Us</a></li><br>
+				<li class="waves-effect waves-light"><a href="/login/logout/">Logout</a></li>
+			</ul>
 	<br>
 	<br>
 	<br>
@@ -37,7 +50,7 @@ table {
 			<i class="material-icons left">add</i>Add new movie</a></span>
 		</div>
 		{% for value in movies %}
-			<div class="col s3">
+			<div class="col s11 m3">
 				<div class="card small">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator" src={%static "images/cin_home/sample-1.jpg"%}>
@@ -61,7 +74,7 @@ table {
 			<i class="material-icons left">add</i>Add new offer</a></span>
 		</div>
 		{% for key,value in offers.items %}
-			<div class="col s3">
+			<div class="col s11 m3">
 				<div class="card small">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator" src={%static "images/cin_home/sample-1.jpg"%}>

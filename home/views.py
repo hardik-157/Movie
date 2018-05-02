@@ -42,6 +42,8 @@ def home(request): #home page view for user...
 	c={}
 	movies = {}
 	cid = request.GET.get('cid','')
+	if 'cinema_id' in request.session:
+		cid=request.session['cinema_id']
 	if (cid!=''):
 		request.session['cinema_id'] = cid
 	else:

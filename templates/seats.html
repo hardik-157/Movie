@@ -63,6 +63,7 @@ window.onload=function()
 	    </div>
 		<form id="chart" action="/book/book/" method="POST">{% csrf_token %}
 		</form>
+		<div>
 			<script type="text/javascript">
 				
 				String.prototype.replaceAt=function(index, replacement) {
@@ -207,6 +208,7 @@ window.onload=function()
 					return total;
 				}
 			</script>
+		</div>
 	</div>
 </div>
 <script src={% static "js/jquery.nicescroll.js" %}></script>

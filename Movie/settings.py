@@ -15,7 +15,7 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+'''
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -33,7 +33,7 @@ DATABASES = {
         default=os.environ['DATABASE_URL']
     )
 }
-'''
+
 ALLOWED_HOSTS = ['10.80.188.54','127.0.0.1', 'mymovie1.herokuapp.com']
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'Movie.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -101,7 +101,7 @@ DATABASES = {
 	'PASSWORD': '',
     }
 }
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

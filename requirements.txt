@@ -1,5 +1,5 @@
 certifi==2018.1.18
-Django==2.0.2
+Django==2.0.8
 google-api-python-client==1.6.6
 gunicorn==19.6.0
 httplib2==0.11.3
